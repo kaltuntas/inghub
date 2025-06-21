@@ -1,0 +1,35 @@
+spring:
+  application.name: ing-credit-module-app
+  profiles.active: default
+---
+spring:
+  config.activate.on-profile: default
+  pid.file: ${java.io.tmpdir}/credit-module.pid
+  datasource:
+    url: jdbc:h2:mem:credit
+    username: sa
+    password: password
+    driver-class-name: org.h2.Driver
+    poolName: credit-module-dbconnectionpool
+  sql:
+    init:
+      mode: always
+  jpa:
+    open-in-view: false
+    database: H2
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+server:
+  port: 8080
+logging:
+  config: classpath:logback.xml
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    oauth:
+      use-basic-authentication-with-access-code-grant: true
